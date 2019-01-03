@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+
+        <File name="appLog"
+                     fileName="logs/nikken-application.log"
+                     filePattern="logs/nikken-application-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1" />
+        </File>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.log4j.xml" level="warn" />
+        <Logger name="org.springframework" level="warn" />
+        <Logger name="net.sf.ehcache" level="warn" />
+        <Logger name="org.hibernate.validator" level="error" />
+        <Logger name="org.hibernate.persister" level="error" />
+        <Logger name="org.hibernate.loader" level="error" />
+        <Logger name="org.hibernate.type" level="error" />
+        <Logger name="org.hibernate.cfg" level="error" />
+        <Logger name="org.hibernate.boot" level="error" />
+        <Logger name="org.hibernate.integrator" level="error" />
+        <Logger name="org.hibernate.hql" level="error" />
+        <Logger name="org.eclipse.jetty" level="warn" />
+        <Logger name="springfox.documentation" level="debug" />
+        <Logger name="org.thymeleaf" level="error" />
+        <Logger name="org.springframework.mail" level="info" />
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="appLog" />
+        </Root>
+        <Logger name="com.nikken.sendnotifications" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="appLog" />
+        </Logger>
+    </Loggers>
+</Configuration>
